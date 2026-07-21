@@ -7,9 +7,11 @@
   var currentStep = 1;
 
   var formFields = [
-    'fullName', 'email', 'phone', 'age', 'gender',
-    'role', 'experience', 'notifyEmail', 'notifySms', 'notifyNewsletter', 'theme'
+    'fullName', 'email', 'phone', 'age',
+    'role', 'experience', 'notifyEmail', 'notifySms', 'notifyNewsletter'
   ];
+
+  var radioGroups = ['gender', 'theme'];
 
   /* ============================================
      DOM References
@@ -106,11 +108,13 @@
       if (!el) return;
       if (el.type === 'checkbox') {
         data[key] = el.checked;
-      } else if (el.tagName === 'SELECT') {
-        data[key] = el.value;
       } else {
         data[key] = el.value;
       }
+    });
+    radioGroups.forEach(function (name) {
+      var checked = document.querySelector('input[name="' + name + '"]:checked');
+      data[name] = checked ? checked.value : '';
     });
     return data;
   }
@@ -124,6 +128,11 @@
       } else {
         el.value = String(data[key]);
       }
+    });
+    radioGroups.forEach(function (name) {
+      if (!data[name]) return;
+      var target = document.querySelector('input[name="' + name + '"][value="' + data[name] + '"]');
+      if (target) target.checked = true;
     });
   }
 
@@ -218,7 +227,20 @@
 
   function formatSelect(val) {
     if (!val) return '—';
-    return val.charAt(0).toUpperCase() + val.slice(1);
+    var labels = {
+      developer: 'Developer',
+      designer: 'Designer',
+      manager: 'Project Manager',
+      student: 'Student',
+      other: 'Other',
+      junior: 'Junior (0-2 years)',
+      mid: 'Mid-Level (3-5 years)',
+      senior: 'Senior (6+ years)',
+      light: 'Light',
+      dark: 'Dark',
+      system: 'System'
+    };
+    return labels[val] || val.charAt(0).toUpperCase() + val.slice(1);
   }
 
   function formatNotifications(data) {
@@ -251,6 +273,9 @@
       } else {
         el.value = '';
       }
+    });
+    radioGroups.forEach(function (name) {
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function (r) { r.checked = false; });
     });
     clearStorage();
     currentStep = 1;
@@ -291,6 +316,9 @@
         el.value = '';
       }
     });
+    radioGroups.forEach(function (name) {
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function (r) { r.checked = false; });
+    });
     els.successState.classList.add('hidden');
     els.footerActions.style.display = '';
     currentStep = 1;
@@ -307,6 +335,13 @@
       if (!el) return;
       var evtType = (el.type === 'checkbox' || el.tagName === 'SELECT') ? 'change' : 'input';
       el.addEventListener(evtType, saveToStorage);
+    });
+
+    // Auto-save for radio groups
+    radioGroups.forEach(function (name) {
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function (r) {
+        r.addEventListener('change', saveToStorage);
+      });
     });
 
     // Step buttons inside cards

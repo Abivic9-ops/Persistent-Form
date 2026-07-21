@@ -667,6 +667,7 @@ input, select, textarea {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
 }
 
 .checkbox-option:hover {
@@ -759,6 +760,7 @@ input, select, textarea {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
 }
 
 .theme-radio {
