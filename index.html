@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete multi-step forms without losing progress. Persistent Form auto-saves your data locally so you never start over.">
+  <meta name="keywords" content="multi-step form, auto-save, localStorage, form persistence">
+  <meta name="theme-color" content="#6C3CF0">
+  <meta property="og:title" content="Persistent Form — Multi-Step Form with Auto-Save">
+  <meta property="og:description" content="Build and complete multi-step forms with automatic browser persistence. Your progress is never lost.">
+  <meta property="og:type" content="website">
+  <title>Persistent Form — Multi-Step Form with Auto-Save</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-container">
+
+    <!-- HEADER -->
+    <header class="app-header" role="banner">
+      <div class="header-left">
+        <div class="brand-icon" aria-hidden="true">
+          <i data-lucide="file-text"></i>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">Persistent Form</h1>
+          <p class="brand-subtitle">
+            Your progress is saved automatically
+            <span class="save-badge" aria-label="Secure auto-save enabled">
+              <i data-lucide="shield-check" aria-hidden="true"></i>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="header-center">
+        <p class="header-heading">Multi-Step Form</p>
+        <p class="header-subtext">Fill in the steps and submit your information</p>
+      </div>
+      <div class="header-right">
+        <button type="button" class="btn-clear" id="clearFormBtn" aria-label="Clear all form data">
+          <i data-lucide="trash-2" aria-hidden="true"></i>
+          <span>Clear Form</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- STEPPER -->
+    <nav class="stepper" aria-label="Form progress">
+      <div class="stepper-track">
+        <div class="stepper-line">
+          <div class="stepper-line-fill" id="stepperLineFill"></div>
+        </div>
+        <div class="step-item active" data-step="1">
+          <button type="button" class="step-circle" aria-current="step" aria-label="Step 1: Personal Information, current step">
+            <span class="step-number">1</span>
+          </button>
+          <div class="step-label">
+            <span class="step-title">Personal Info</span>
+            <span class="step-caption">Step 1 of 3</span>
+          </div>
+        </div>
+        <div class="step-item" data-step="2">
+          <button type="button" class="step-circle" aria-label="Step 2: Preferences">
+            <span class="step-number">2</span>
+          </button>
+          <div class="step-label">
+            <span class="step-title">Preferences</span>
+            <span class="step-caption">Step 2 of 3</span>
+          </div>
+        </div>
+        <div class="step-item" data-step="3">
+          <button type="button" class="step-circle" aria-label="Step 3: Review and Submit">
+            <span class="step-number">3</span>
+          </button>
+          <div class="step-label">
+            <span class="step-title">Review</span>
+            <span class="step-caption">Step 3 of 3</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-layout">
+
+      <!-- FORM PANEL -->
+      <section class="form-panel" aria-label="Form steps">
+
+        <!-- STEP 1: PERSONAL INFORMATION -->
+        <div class="form-card" id="step1" role="group" aria-labelledby="step1-heading">
+          <div class="card-header">
+            <div class="card-icon" aria-hidden="true">
+              <i data-lucide="user"></i>
+            </div>
+            <div>
+              <h2 id="step1-heading" class="card-title">Personal Information</h2>
+              <p class="card-description">Please enter your basic personal details</p>
+            </div>
+          </div>
+          <hr class="card-divider">
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="fullName" class="field-label">Full Name</label>
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <i data-lucide="user"></i>
+                </span>
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  class="form-input"
+                  placeholder="Enter your full name"
+                  autocomplete="name"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="email" class="field-label">Email Address</label>
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <i data-lucide="mail"></i>
+                </span>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="phone" class="field-label">Phone Number</label>
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <i data-lucide="phone"></i>
+                </span>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="form-input"
+                  placeholder="+254 700 000 000"
+                  autocomplete="tel"
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="age" class="field-label">Age</label>
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <i data-lucide="calendar"></i>
+                </span>
+                <select id="age" name="age" class="form-input form-select" autocomplete="off">
+                  <option value="" disabled selected>Select your age</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="gender-fieldset">
+            <legend class="field-label">Gender</legend>
+            <div class="gender-options" role="radiogroup" aria-label="Select gender">
+              <label class="gender-option" for="gender-male">
+                <input type="radio" id="gender-male" name="gender" value="Male" class="gender-radio">
+                <span class="gender-icon" aria-hidden="true">
+                  <i data-lucide="user"></i>
+                </span>
+                <span class="gender-text">Male</span>
+                <span class="gender-check" aria-hidden="true">
+                  <i data-lucide="check"></i>
+                </span>
+              </label>
+              <label class="gender-option" for="gender-female">
+                <input type="radio" id="gender-female" name="gender" value="Female" class="gender-radio">
+                <span class="gender-icon" aria-hidden="true">
+                  <i data-lucide="user"></i>
+                </span>
+                <span class="gender-text">Female</span>
+                <span class="gender-check" aria-hidden="true">
+                  <i data-lucide="check"></i>
+                </span>
+              </label>
+              <label class="gender-option" for="gender-other">
+                <input type="radio" id="gender-other" name="gender" value="Other" class="gender-radio">
+                <span class="gender-icon" aria-hidden="true">
+                  <i data-lucide="users"></i>
+                </span>
+                <span class="gender-text">Other</span>
+                <span class="gender-check" aria-hidden="true">
+                  <i data-lucide="check"></i>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="card-actions">
+            <span></span>
+            <button type="button" class="btn-primary" id="nextToStep2" aria-label="Continue to Preferences step">
+              <span>Next Step</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: PREFERENCES -->
+        <div class="form-card hidden" id="step2" role="group" aria-labelledby="step2-heading">
+          <div class="card-header">
+            <div class="card-icon" aria-hidden="true">
+              <i data-lucide="sliders"></i>
+            </div>
+            <div>
+              <h2 id="step2-heading" class="card-title">Preferences</h2>
+              <p class="card-description">Customize your experience and notification settings</p>
+            </div>
+          </div>
+          <hr class="card-divider">
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="role" class="field-label">Your Role</label>
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <i data-lucide="briefcase"></i>
+                </span>
+                <select id="role" name="role" class="form-input form-select">
+                  <option value="" disabled selected>Select your role</option>
+                  <option value="developer">Developer</option>
+                  <option value="designer">Designer</option>
+                  <option value="manager">Project Manager</option>
+                  <option value="student">Student</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="experience" class="field-label">Experience Level</label>
+              <div class="input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <i data-lucide="bar-chart-3"></i>
+                </span>
+                <select id="experience" name="experience" class="form-input form-select">
+                  <option value="" disabled selected>Select experience</option>
+                  <option value="junior">Junior (0-2 years)</option>
+                  <option value="mid">Mid-Level (3-5 years)</option>
+                  <option value="senior">Senior (6+ years)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="preferences-fieldset">
+            <legend class="field-label">Notification Preferences</legend>
+            <div class="checkbox-group">
+              <label class="checkbox-option" for="notifyEmail">
+                <input type="checkbox" id="notifyEmail" name="notifyEmail" value="email" class="checkbox-input">
+                <span class="checkbox-custom" aria-hidden="true">
+                  <i data-lucide="check"></i>
+                </span>
+                <span class="checkbox-content">
+                  <span class="checkbox-label">Email Notifications</span>
+                  <span class="checkbox-desc">Receive updates and confirmations via email</span>
+                </span>
+              </label>
+              <label class="checkbox-option" for="notifySms">
+                <input type="checkbox" id="notifySms" name="notifySms" value="sms" class="checkbox-input">
+                <span class="checkbox-custom" aria-hidden="true">
+                  <i data-lucide="check"></i>
+                </span>
+                <span class="checkbox-content">
+                  <span class="checkbox-label">SMS Alerts</span>
+                  <span class="checkbox-desc">Get text messages for critical updates only</span>
+                </span>
+              </label>
+              <label class="checkbox-option" for="notifyNewsletter">
+                <input type="checkbox" id="notifyNewsletter" name="notifyNewsletter" value="newsletter" class="checkbox-input">
+                <span class="checkbox-custom" aria-hidden="true">
+                  <i data-lucide="check"></i>
+                </span>
+                <span class="checkbox-content">
+                  <span class="checkbox-label">Monthly Newsletter</span>
+                  <span class="checkbox-desc">Product news, tips, and feature announcements</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="preferences-fieldset">
+            <legend class="field-label">Appearance</legend>
+            <div class="theme-options" role="radiogroup" aria-label="Select theme preference">
+              <label class="theme-option" for="theme-light">
+                <input type="radio" id="theme-light" name="theme" value="light" class="theme-radio">
+                <span class="theme-icon" aria-hidden="true">
+                  <i data-lucide="sun"></i>
+                </span>
+                <span class="theme-text">Light</span>
+              </label>
+              <label class="theme-option" for="theme-dark">
+                <input type="radio" id="theme-dark" name="theme" value="dark" class="theme-radio">
+                <span class="theme-icon" aria-hidden="true">
+                  <i data-lucide="moon"></i>
+                </span>
+                <span class="theme-text">Dark</span>
+              </label>
+              <label class="theme-option" for="theme-system">
+                <input type="radio" id="theme-system" name="theme" value="system" class="theme-radio">
+                <span class="theme-icon" aria-hidden="true">
+                  <i data-lucide="monitor"></i>
+                </span>
+                <span class="theme-text">System</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="card-actions">
+            <button type="button" class="btn-secondary" id="backToStep1" aria-label="Go back to Personal Information">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Previous</span>
+            </button>
+            <button type="button" class="btn-primary" id="nextToStep3" aria-label="Continue to Review step">
+              <span>Next Step</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: REVIEW & SUBMIT -->
+        <div class="form-card hidden" id="step3" role="group" aria-labelledby="step3-heading">
+          <div class="card-header">
+            <div class="card-icon" aria-hidden="true">
+              <i data-lucide="clipboard-check"></i>
+            </div>
+            <div>
+              <h2 id="step3-heading" class="card-title">Review & Submit</h2>
+              <p class="card-description">Verify all your information before final submission</p>
+            </div>
+          </div>
+          <hr class="card-divider">
+
+          <div class="review-sections">
+            <div class="review-section">
+              <h3 class="review-section-title">
+                <i data-lucide="user" aria-hidden="true"></i>
+                Personal Information
+              </h3>
+              <div class="review-grid">
+                <div class="review-item">
+                  <span class="review-label">Full Name</span>
+                  <span class="review-value" id="reviewFullName">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Email Address</span>
+                  <span class="review-value" id="reviewEmail">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Phone Number</span>
+                  <span class="review-value" id="reviewPhone">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Age</span>
+                  <span class="review-value" id="reviewAge">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Gender</span>
+                  <span class="review-value" id="reviewGender">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-section">
+              <h3 class="review-section-title">
+                <i data-lucide="sliders" aria-hidden="true"></i>
+                Preferences
+              </h3>
+              <div class="review-grid">
+                <div class="review-item">
+                  <span class="review-label">Role</span>
+                  <span class="review-value" id="reviewRole">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Experience</span>
+                  <span class="review-value" id="reviewExperience">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Notifications</span>
+                  <span class="review-value" id="reviewNotifications">—</span>
+                </div>
+                <div class="review-item">
+                  <span class="review-label">Theme</span>
+                  <span class="review-value" id="reviewTheme">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button type="button" class="btn-secondary" id="backToStep2" aria-label="Go back to Preferences">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              <span>Previous</span>
+            </button>
+            <button type="button" class="btn-primary btn-submit" id="submitForm" aria-label="Submit form">
+              <i data-lucide="check-circle" aria-hidden="true"></i>
+              <span>Submit Form</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SUCCESS STATE -->
+        <div class="form-card hidden" id="successState" role="status" aria-labelledby="success-heading">
+          <div class="success-content">
+            <div class="success-icon" aria-hidden="true">
+              <i data-lucide="check-circle"></i>
+            </div>
+            <h2 id="success-heading" class="success-title">Form Submitted Successfully</h2>
+            <p class="success-description">Your information has been received and all locally stored data has been cleared. You can safely close this page or start a new submission.</p>
+            <button type="button" class="btn-primary" id="startNew" aria-label="Start a new form submission">
+              <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+              <span>Start New Submission</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIDEBAR -->
+        <aside class="sidebar" aria-label="Form progress and information">
+
+          <!-- Progress Card -->
+          <div class="sidebar-card">
+            <div class="progress-ring-wrapper">
+              <svg class="progress-ring" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="progress-ring-bg" cx="60" cy="60" r="52" />
+                <circle class="progress-ring-fill" id="progressRingFill" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="progress-ring-text">
+                <span class="progress-percent" id="progressPercent">33%</span>
+                <span class="progress-step" id="progressStepLabel">Step 1 of 3</span>
+              </div>
+            </div>
+            <p class="sidebar-reassurance">
+              Your data is being saved automatically
+              <span class="save-badge-sm" aria-label="Secure">
+                <i data-lucide="shield-check" aria-hidden="true"></i>
+              </span>
+            </p>
+          </div>
+
+          <!-- Safety Card -->
+          <div class="sidebar-card">
+            <div class="sidebar-card-header">
+              <div class="sidebar-card-icon" aria-hidden="true">
+                <i data-lucide="shield"></i>
+              </div>
+              <h3 class="sidebar-card-title">Why your data is safe</h3>
+            </div>
+            <ul class="safety-list">
+              <li class="safety-item">
+                <span class="safety-check" aria-hidden="true">
+                  <i data-lucide="check-circle-2"></i>
+                </span>
+                <span>The form automatically saves to the browser</span>
+              </li>
+              <li class="safety-item">
+                <span class="safety-check" aria-hidden="true">
+                  <i data-lucide="check-circle-2"></i>
+                </span>
+                <span>Progress is never lost between sessions</span>
+              </li>
+              <li class="safety-item">
+                <span class="safety-check" aria-hidden="true">
+                  <i data-lucide="check-circle-2"></i>
+                </span>
+                <span>Data stays on your device, nowhere else</span>
+              </li>
+              <li class="safety-item">
+                <span class="safety-check" aria-hidden="true">
+                  <i data-lucide="check-circle-2"></i>
+                </span>
+                <span>All stored data is removed after submission</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="app-footer" role="contentinfo">
+        <div class="footer-status">
+          <span class="footer-saved-icon" aria-hidden="true">
+            <i data-lucide="check-circle-2"></i>
+          </span>
+          <div class="footer-saved-text">
+            <span class="footer-saved-title">Progress Saved</span>
+            <span class="footer-saved-desc">Your information is stored in this browser</span>
+          </div>
+        </div>
+        <div class="footer-actions" id="footerActions">
+          <button type="button" class="btn-secondary btn-footer" id="footerPrev" aria-label="Go to previous step">
+            <i data-lucide="arrow-left" aria-hidden="true"></i>
+            <span>Previous</span>
+          </button>
+          <button type="button" class="btn-primary btn-footer" id="footerNext" aria-label="Go to next step">
+            <span>Next Step</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </footer>
+    </main>
+
+    <!-- CLEAR CONFIRMATION DIALOG -->
+    <dialog class="confirm-dialog" id="clearDialog" aria-labelledby="clearDialogTitle">
+      <div class="dialog-content">
+        <div class="dialog-icon" aria-hidden="true">
+          <i data-lucide="alert-triangle"></i>
+        </div>
+        <h2 id="clearDialogTitle" class="dialog-title">Clear all form data?</h2>
+        <p class="dialog-description">This action cannot be undone. All your entered information will be permanently removed from this browser.</p>
+        <div class="dialog-actions">
+          <button type="button" class="btn-secondary" id="cancelClear">Cancel</button>
+          <button type="button" class="btn-danger" id="confirmClear">
+            <i data-lucide="trash-2" aria-hidden="true"></i>
+            <span>Clear Everything</span>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
