@@ -1297,7 +1297,25 @@ input, select, textarea {
 }
 
 /* ============================================
-   Responsive — Tablet
+   Responsive — Small Laptop / Large Tablet
+   ============================================ */
+@media (max-width: 1100px) {
+  .app-container {
+    max-width: 960px;
+  }
+
+  .content-layout {
+    gap: var(--sp-5);
+    padding: var(--sp-6);
+  }
+
+  .form-card {
+    padding: var(--sp-7);
+  }
+}
+
+/* ============================================
+   Responsive — Tablet Landscape
    ============================================ */
 @media (max-width: 960px) {
   .content-layout {
@@ -1311,12 +1329,82 @@ input, select, textarea {
   .sidebar-card {
     flex: 1;
   }
+
+  .stepper-track {
+    max-width: 480px;
+  }
 }
 
 /* ============================================
-   Responsive — Mobile
+   Responsive — Tablet Portrait
    ============================================ */
-@media (max-width: 680px) {
+@media (max-width: 768px) {
+  body {
+    padding: var(--sp-3);
+  }
+
+  .app-container {
+    max-width: 100%;
+  }
+
+  .app-header {
+    padding: var(--sp-4) var(--sp-5);
+  }
+
+  .header-heading {
+    font-size: var(--text-lg);
+  }
+
+  .stepper {
+    padding: var(--sp-6) var(--sp-5);
+  }
+
+  .stepper-track {
+    max-width: 400px;
+  }
+
+  .stepper-line {
+    left: 50px;
+    right: 50px;
+    top: 26px;
+  }
+
+  .step-circle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .content-layout {
+    padding: var(--sp-5);
+    gap: var(--sp-5);
+  }
+
+  .form-card {
+    padding: var(--sp-6);
+  }
+
+  .sidebar {
+    flex-direction: row;
+  }
+
+  .progress-ring {
+    width: 100px;
+    height: 100px;
+  }
+
+  .progress-percent {
+    font-size: var(--text-xl);
+  }
+
+  .app-footer {
+    padding: var(--sp-4) var(--sp-5);
+  }
+}
+
+/* ============================================
+   Responsive — Large Phone
+   ============================================ */
+@media (max-width: 600px) {
   body {
     padding: var(--sp-2);
     align-items: flex-start;
@@ -1324,7 +1412,7 @@ input, select, textarea {
 
   .app-header {
     flex-wrap: wrap;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
     padding: var(--sp-4);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
@@ -1334,18 +1422,41 @@ input, select, textarea {
     width: 100%;
   }
 
+  .header-heading {
+    font-size: var(--text-md);
+  }
+
   .header-left {
     flex: 1;
+  }
+
+  .brand-title {
+    font-size: var(--text-base);
+  }
+
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-icon i {
+    width: 18px;
+    height: 18px;
   }
 
   .stepper {
     padding: var(--sp-5) var(--sp-4);
   }
 
+  .stepper-track {
+    max-width: 320px;
+  }
+
   .stepper-line {
     left: 40px;
     right: 40px;
     top: 24px;
+    height: 2px;
   }
 
   .step-circle {
@@ -1357,47 +1468,147 @@ input, select, textarea {
     font-size: var(--text-base);
   }
 
+  .step-title {
+    font-size: var(--text-xs);
+  }
+
+  .step-caption {
+    font-size: 0.6875rem;
+  }
+
   .content-layout {
-    padding: var(--sp-4);
+    padding: var(--sp-3);
     border-radius: 0;
     border-left: none;
     border-right: none;
+    min-height: auto;
   }
 
   .form-card {
     padding: var(--sp-5);
   }
 
+  .card-title {
+    font-size: var(--text-lg);
+  }
+
+  .card-header {
+    gap: var(--sp-3);
+  }
+
+  .card-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .card-icon i {
+    width: 18px;
+    height: 18px;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+
+  .form-input {
+    height: 44px;
+    font-size: var(--text-sm);
+  }
+
+  .input-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .input-icon i {
+    width: 16px;
+    height: 16px;
+  }
+
+  .form-input {
+    padding-left: 46px;
   }
 
   .gender-options {
     grid-template-columns: 1fr;
   }
 
+  .gender-option {
+    padding: var(--sp-3) var(--sp-4);
+  }
+
   .theme-options {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-2);
+  }
+
+  .theme-option {
+    padding: var(--sp-4) var(--sp-3);
+  }
+
+  .theme-icon i {
+    width: 20px;
+    height: 20px;
+  }
+
+  .theme-text {
+    font-size: var(--text-xs);
+  }
+
+  .checkbox-option {
+    padding: var(--sp-3);
+  }
+
+  .review-section {
+    padding: var(--sp-4);
   }
 
   .review-grid {
     grid-template-columns: 1fr;
+    gap: var(--sp-3);
   }
 
   .sidebar {
     flex-direction: column;
   }
 
+  .sidebar-card {
+    padding: var(--sp-5);
+  }
+
+  .progress-ring {
+    width: 90px;
+    height: 90px;
+  }
+
+  .progress-percent {
+    font-size: var(--text-lg);
+  }
+
+  .progress-step {
+    font-size: 0.6875rem;
+  }
+
   .app-footer {
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
     padding: var(--sp-4);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+
+  .footer-saved-desc {
+    font-size: 0.6875rem;
   }
 
   .footer-actions {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .btn-footer {
+    padding: var(--sp-2) var(--sp-4);
+    font-size: var(--text-xs);
   }
 
   .card-actions {
@@ -1407,6 +1618,336 @@ input, select, textarea {
 
   .card-actions .btn-primary,
   .card-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .success-content {
+    padding: var(--sp-7) var(--sp-5);
+  }
+
+  .success-title {
+    font-size: var(--text-xl);
+  }
+
+  .success-description {
+    font-size: var(--text-sm);
+  }
+}
+
+/* ============================================
+   Responsive — Standard Phone
+   ============================================ */
+@media (max-width: 420px) {
+  .app-header {
+    padding: var(--sp-3);
+    gap: var(--sp-2);
+  }
+
+  .header-center {
+    margin-bottom: var(--sp-1);
+  }
+
+  .header-heading {
+    font-size: var(--text-sm);
+  }
+
+  .header-subtext {
+    font-size: var(--text-xs);
+  }
+
+  .btn-clear {
+    padding: var(--sp-1) var(--sp-3);
+    font-size: var(--text-xs);
+  }
+
+  .btn-clear i {
+    width: 14px;
+    height: 14px;
+  }
+
+  .stepper {
+    padding: var(--sp-4) var(--sp-3);
+  }
+
+  .stepper-track {
+    max-width: 280px;
+  }
+
+  .stepper-line {
+    left: 32px;
+    right: 32px;
+    top: 20px;
+  }
+
+  .step-circle {
+    width: 42px;
+    height: 44px;
+  }
+
+  .step-number {
+    font-size: var(--text-sm);
+  }
+
+  .step-label {
+    gap: 1px;
+  }
+
+  .step-title {
+    font-size: 0.6875rem;
+  }
+
+  .step-caption {
+    font-size: 0.625rem;
+  }
+
+  .content-layout {
+    padding: var(--sp-2);
+  }
+
+  .form-card {
+    padding: var(--sp-4);
+    border-radius: var(--radius-md);
+  }
+
+  .card-title {
+    font-size: var(--text-md);
+  }
+
+  .card-description {
+    font-size: var(--text-xs);
+  }
+
+  .card-divider {
+    margin: var(--sp-4) 0;
+  }
+
+  .field-label {
+    font-size: var(--text-xs);
+  }
+
+  .form-input {
+    height: 42px;
+    font-size: var(--text-xs);
+  }
+
+  .input-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .input-icon i {
+    width: 14px;
+    height: 14px;
+  }
+
+  .form-input {
+    padding-left: 42px;
+  }
+
+  .gender-fieldset {
+    margin-top: var(--sp-4);
+  }
+
+  .gender-option {
+    gap: var(--sp-2);
+    padding: var(--sp-3);
+  }
+
+  .gender-icon i {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gender-text {
+    font-size: var(--text-xs);
+  }
+
+  .preferences-fieldset {
+    margin-top: var(--sp-4);
+  }
+
+  .theme-options {
+    gap: var(--sp-2);
+  }
+
+  .theme-option {
+    padding: var(--sp-3) var(--sp-2);
+    gap: var(--sp-1);
+  }
+
+  .theme-icon i {
+    width: 18px;
+    height: 18px;
+  }
+
+  .theme-text {
+    font-size: 0.6875rem;
+  }
+
+  .checkbox-label {
+    font-size: var(--text-xs);
+  }
+
+  .checkbox-desc {
+    font-size: 0.6875rem;
+  }
+
+  .card-actions {
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+  }
+
+  .btn-primary {
+    padding: var(--sp-3) var(--sp-5);
+    font-size: var(--text-xs);
+  }
+
+  .btn-secondary {
+    padding: var(--sp-3) var(--sp-4);
+    font-size: var(--text-xs);
+  }
+
+  .review-section-title {
+    font-size: var(--text-sm);
+  }
+
+  .review-label {
+    font-size: 0.6875rem;
+  }
+
+  .review-value {
+    font-size: var(--text-sm);
+  }
+
+  .sidebar-card {
+    padding: var(--sp-4);
+  }
+
+  .sidebar-card-title {
+    font-size: var(--text-xs);
+  }
+
+  .safety-item {
+    font-size: var(--text-xs);
+    gap: var(--sp-1);
+  }
+
+  .safety-check i {
+    width: 14px;
+    height: 14px;
+  }
+
+  .sidebar-reassurance {
+    font-size: 0.6875rem;
+  }
+
+  .progress-ring {
+    width: 80px;
+    height: 80px;
+  }
+
+  .progress-ring-fill {
+    stroke-width: 6;
+  }
+
+  .progress-ring-bg {
+    stroke-width: 6;
+  }
+
+  .progress-percent {
+    font-size: var(--text-md);
+  }
+
+  .progress-step {
+    font-size: 0.625rem;
+  }
+
+  .app-footer {
+    padding: var(--sp-3);
+    gap: var(--sp-3);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .footer-saved-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-saved-icon i {
+    width: 16px;
+    height: 16px;
+  }
+
+  .footer-saved-title {
+    font-size: var(--text-xs);
+  }
+
+  .footer-saved-desc {
+    font-size: 0.625rem;
+  }
+
+  .footer-actions {
+    gap: var(--sp-2);
+  }
+
+  .btn-footer {
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 0.6875rem;
+  }
+
+  .btn-footer i {
+    width: 14px;
+    height: 14px;
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .success-icon i {
+    width: 32px;
+    height: 32px;
+  }
+
+  .success-title {
+    font-size: var(--text-lg);
+  }
+
+  .success-description {
+    font-size: var(--text-xs);
+    max-width: 300px;
+  }
+
+  .dialog-content {
+    padding: var(--sp-5);
+  }
+
+  .dialog-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .dialog-icon i {
+    width: 24px;
+    height: 24px;
+  }
+
+  .dialog-title {
+    font-size: var(--text-md);
+  }
+
+  .dialog-description {
+    font-size: var(--text-xs);
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+  }
+
+  .dialog-actions .btn-secondary,
+  .dialog-actions .btn-danger {
     width: 100%;
     justify-content: center;
   }
